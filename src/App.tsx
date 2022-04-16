@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// REACT
+import { useState } from "react";
+// CSS
+import styles from "./App.module.css";
+// COMPONENTS
+import SearchBar from "./components/SearchBar";
+import Results from "./components/Results";
+import ResultDetailed from "./components/ResultDetailed";
+// HOOKS
+import useFetch from "./hooks/useFetch";
+// LIBRARIES
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+const App = () => {
+  // STATE--------------------------------------------
+  const [searchTerm, setSearchTerm] = useState("");
+  // HOOKS
+  const { data, error, loading } = useFetch(searchTerm, "s");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.app}>
+      <BrowserRouter>
+        <h1>movie-search</h1>
+        <SearchBar setSearchTerm={setSearchTerm} />
+        <Routes>
+          <Route path="/" element={<Results data={data} loading={loading} searchTerm={searchTerm} error={error} />} />
+          <Route path="/:Title" element={<ResultDetailed />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

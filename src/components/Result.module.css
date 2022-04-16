@@ -1,0 +1,20 @@
+.result {
+  /* BORDER */
+  border: 2px solid #303030;
+  border-radius: 10px;
+  /* MARGIN, PADDING */
+  margin-top: 5px;
+  padding: 10px;
+  /* OTHER */
+  cursor: pointer;
+  transition: background-color ease-in-out 100ms;
+}
+
+.result:hover {
+  background-color: #303030;
+  transition: background-color ease-in-out 100ms;
+}
+.result:active {
+  background-color: #464646;
+  transition: background-color ease-in-out 100ms;
+}
